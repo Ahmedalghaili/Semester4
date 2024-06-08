@@ -1,0 +1,9 @@
+@media screen and (max-width: 500) {
+    #p1{
+        display: inline;
+    }
+    #p22{
+       display: none;
+    }
+    
+}
