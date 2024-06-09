@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['react', 'react-dom', '@headlessui/react', '@heroicons/react']
+      external: ['react', 'react-dom', '@headlessui/react', '@heroicons/react', 'react-apexcharts', 'apexcharts']
     }
   }
 });

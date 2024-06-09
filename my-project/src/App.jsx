@@ -8,7 +8,7 @@ import Example1 from './Example1.jsx';
 import Registrasi from './Registrasi.jsx';
 import Report from './Report.jsx';
 import Login from './Loginpages/Login1.jsx';
-import User from './User.jsx';
+import User from './Report/User.jsx';
 
 function App() {
   return (
