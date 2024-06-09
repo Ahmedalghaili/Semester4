@@ -27,7 +27,7 @@ class ApexChart extends React.Component {
   render() {
     return (
       <div>
-        <div className="flex flex-col sm:flex-col-reverse sm:space-y-4">
+        <div className="">
           <ReactApexChart
             options={this.state.options}
             series={this.state.series}

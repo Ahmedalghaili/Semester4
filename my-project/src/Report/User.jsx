@@ -19,7 +19,7 @@ const CircularProgress = ({ completedColor, remainingColor }) => {
 
 
     return (
-        <div className='flex space-x-2 p-20 h-screen sm:inline'>
+        <div className='lg:flex space-x-2 p-20 h-screen sm:inline'>
             <form>
                 <div className="  space-y-12 col-span-2 flex sm:pl-8">
                     <div className="border-b border-gray-900/10 pb-12">
