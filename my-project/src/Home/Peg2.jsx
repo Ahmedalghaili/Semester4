@@ -5,20 +5,21 @@ export default function Peg2() {
     console.log("Peg2 component rendered"); // Debug log
 
     return (
-        <div className="flex">
+        <div className="lg:flex sm:inline">
             {/* Box Container */}
-            <div className="w-1/2 h-screen p-5 border border-gray-300 shadow-lg rounded-lg ">
+            <div className="lg:w-1/2 p-5 border border-gray-300 shadow-lg rounded-lg  sm:w-auto">
                 {/* Image Section */}
                 <div
                     style={{ backgroundImage: `url(${img})` }}
-                    className="bg-cover bg-center w-full h-full rounded-lg "
+                    className="relative bg-cover bg-center lg:w-full h-80 rounded-lg "
                 >
-                    {/* Optional: Add any content or overlay on the image if needed */}
+                    {/* Overlay to make the image shaded */}
+                    <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
                 </div>
             </div>
 
             {/* Text Content Section */}
-            <div className="w-1/2 flex items-center justify-center p-10">
+            <div className="lg:w-1/2 flex items-center justify-center p-10">
                 <div>
                     <h1 className="text-3xl font-bold mb-4">Make some Reports!</h1>
                     <p className="text-gray-700 mb-6">

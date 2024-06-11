@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import img from './aimg.jpg';
 import icon from './Group 18.png';
 import Peg2 from './Peg2';
-import Peg3 from './Peg3'
+import Peg3 from './Peg3';
+import Tape from './Tape';
+import Footer from './Footer';
 
 const navigation = [
-    { name: 'Product', href: '#' },
+    { name: 'Home', href: '#' },
     { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    { name: '********', href: '#' },
+    { name: '*******', href: '#' },
 ];
 
 export default function Home() {
@@ -159,8 +161,11 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='flex'><Peg2 /></div>
-            <div><Peg3/></div>
+            <div><Tape/></div>
+            <div ><Peg2 /></div>
+            <div><Peg3 /></div>
+            <div><Footer /></div>
+
 
 
         </div>

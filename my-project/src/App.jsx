@@ -10,6 +10,7 @@ import Login from './Loginpages/Login1.jsx';
 import User from './Report/User.jsx';
 import Peg2 from './Home/Peg2.jsx'
 import Peg3 from './Home/Peg3.jsx'
+import Example from './Home/Footer.jsx';
 
 function App() {
   return (
