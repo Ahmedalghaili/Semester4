@@ -3,7 +3,7 @@ import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import img from './aimg.jpg';
-import icon from './Group 18.png';
+import icon from './Icon.png';
 import Peg2 from './Peg2';
 import Peg3 from './Peg3';
 import Tape from './Tape';
@@ -52,7 +52,7 @@ export default function Home() {
                                 <Link to="/login">
                                     <a
                                         href="#"
-                                        className="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="rounded-md bg-green-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
                                         Login
                                     </a>
@@ -64,7 +64,7 @@ export default function Home() {
                                         href="#"
                                         className="text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
-                                        Sign Up
+                                        Sing Up
                                     </a>
                                 </Link>
                             </div>
@@ -136,11 +136,11 @@ export default function Home() {
                                 <Link to="/User">
                                     <a
                                         href="#"
-                                        className="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="rounded-md bg-green-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
                                         Start Reporting
                                     </a>
-                                    <a href="#" className="text-sm font-semibold leading-6 text-white">
+                                    <a href="#" className="text-sm font-semibold leading-6 text-white hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                                         Learn More <span aria-hidden="true">→</span>
                                     </a>
                                 </Link>
