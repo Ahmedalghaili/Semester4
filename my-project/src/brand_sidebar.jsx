@@ -83,7 +83,7 @@ export default function Example() {
                       alt="Workflow"
                     />
                   </div>
-                  <nav className="mt-5 px-2 space-y-1">
+                  <nav className="mt-5 px-2 space-y-1" >
                     {navigation.map((item) => (
                       <a
                         key={item.name}
