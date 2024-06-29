@@ -9,12 +9,18 @@ import User from './Report/User.jsx';
 // import Em from './brand_sidebar.jsx';
 import ReportPage from './ReportPage';
 // import Report from './Report';
+////////////////////////////////////
 import Example from './Loginpages/split_screen.jsx'
+import Registartion from './Loginpages/Registartion.jsx'
+import Report1 from './Report/Report1.jsx'
+import Chart1 from './Report/Chart1.jsx'
+import Chart2 from './Report/Chart2.jsx'
+import Chart3 from './Report/Chart3.jsx'
 
 function App() {  
   return (
    
-<Example/>
+<Chart3/>
     // <Router>
     //   <Routes>
     //     <Route path="/" element={<Home />} />

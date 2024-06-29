@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@headlessui/react": "^2.0.4",
-    "@mui/x-charts": "^7.6.1",
-    "chart.js": "^4.4.3",
-    "react-chartjs-2": "^5.2.0"
-  }
-}
