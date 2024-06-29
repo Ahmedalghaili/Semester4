@@ -6,7 +6,7 @@ import Registrasi from './Registrasi.jsx';
 import Report from './ReportPage.jsx';
 import Login from './Loginpages/Login1.jsx';
 import User from './Report/User.jsx';
-import Em from './brand_sidebar.jsx';
+// import Em from './brand_sidebar.jsx';
 import ReportPage from './ReportPage';
 
 function App() {
