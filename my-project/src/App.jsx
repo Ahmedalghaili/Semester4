@@ -8,20 +8,22 @@ import Login from './Loginpages/Login1.jsx';
 import User from './Report/User.jsx';
 // import Em from './brand_sidebar.jsx';
 import ReportPage from './ReportPage';
+// import Report from './Report';
+import Example from './Loginpages/split_screen.jsx'
 
-function App() {
+function App() {  
   return (
- 
-
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registrasi />} />
-        <Route path="/report" element={<ReportPage />} />
-        <Route path="/user" element={<ReportPage />} />
-      </Routes>
-    </Router>
+   
+<Example/>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<Home />} />
+    //     <Route path="/login" element={<Login />} />
+    //     <Route path="/register" element={<Registrasi />} />
+    //     <Route path="/report" element={<ReportPage />} />
+    //     <Route path="/user" element={<ReportPage />} />
+    //   </Routes>
+    // </Router>
   );
 }
 
