@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './Home/Home.jsx';
-import Registrasi from './Registrasi.jsx';
+import Registrasi from './Report/MainComponent.jsx';
 import Report from './ReportPage.jsx';
 import Login from './Loginpages/Login1.jsx';
 import User from './Report/User.jsx';
@@ -15,17 +15,16 @@ import Registartion from './Loginpages/Registartion.jsx'
 import Report1 from './Report/Report1.jsx'
 import Chart1 from './Report/Chart1.jsx'
 import Chart2 from './Report/Chart2.jsx'
-import Chart3 from './Report/Chart3.jsx'
-
-function App() {  
+import StatisticalDataReport from './Report/StatisticalDataReport.jsx';
+import ViewComplaints from './ViewComplaints.jsx';
+function App() {
   return (
-   
-<Chart3/>
+  <ViewComplaints/>
     // <Router>
     //   <Routes>
     //     <Route path="/" element={<Home />} />
-    //     <Route path="/login" element={<Login />} />
-    //     <Route path="/register" element={<Registrasi />} />
+    //     <Route path="/login" element={<Example />} />
+    //     <Route path="/register" element={<Registartion />} />
     //     <Route path="/report" element={<ReportPage />} />
     //     <Route path="/user" element={<ReportPage />} />
     //   </Routes>

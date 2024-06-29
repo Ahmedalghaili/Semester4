@@ -1,23 +1,57 @@
-import React from "react";
-import { Doughnut } from "react-chartjs-2";
-import 'chart.js/auto';
+import React from 'react';
+import ApexCharts from 'react-apexcharts';
+import { Link } from 'react-router-dom';
 import logo from '../Home/Icon.png'; // Replace with the correct path to your logo
 import userImage from '../Home/Icon.png'; // Replace with the correct path to your user image
-import { Link } from 'react-router-dom';
 
-const data = {
-    labels: ["Complete", "In Progress", "Not Addressed"],
-    datasets: [
-        {
-            label: "Reports",
-            data: [20, 30, 50],
-            backgroundColor: ["#FFCE56", "#FF6384", "#4BC0C0"],
-            hoverBackgroundColor: ["#FFCE56", "#FF6384", "#4BC0C0"]
-        }
-    ]
-};
+const StatisticalDataReport = () => {
+    const options = {
+        chart: {
+            type: 'area',
+            height: 350,
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'category',
+            categories: ['January', 'February', 'March', 'April', 'May']
+        },
+        yaxis: {
+            title: {
+                text: 'Number of Reports'
+            }
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.9,
+                stops: [0, 90, 100]
+            }
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
+        },
+    };
 
-export default function Chart2() {
+    const series = [{
+        name: 'Reports',
+        data: [10, 55, 10, 12.5, 12.5]
+    }];
+
+    const months = ['January', 'February', 'March', 'April', 'May'];
+    const reportData = series[0].data;
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <header className="flex justify-between items-center p-4 bg-white shadow-md">
@@ -44,37 +78,15 @@ export default function Chart2() {
                         <Link to="/statistical-data-report" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Number of Reports per Month</Link>
                     </div>
 
-                    <div className="flex justify-center mb-6 sm:mb-8 h-80 w-full">
-                        <Doughnut data={data} />
+                    <div className="mt-4">
+                        <ApexCharts options={options} series={series} type="area" height={350} />
                     </div>
-
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200 text-xs sm:text-sm">
-                            <thead className="bg-green-600">
-                                <tr>
-                                    <th className="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs sm:text-sm font-medium text-white uppercase tracking-wider">
-                                        Category Name
-                                    </th>
-                                    <th className="px-3 py-2 sm:px-6 sm:py-3 text-right text-xs sm:text-sm font-medium text-white uppercase tracking-wider">
-                                        Number of Reports
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">Complete</td>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-right">1,000</td>
-                                </tr>
-                                <tr>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">In Progress</td>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-right">1,000</td>
-                                </tr>
-                                <tr>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">Not Addressed</td>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-right">1,000</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                        {months.map((month, index) => (
+                            <div key={index} className="bg-white shadow p-4 rounded">
+                                {month} <span className="text-2xl">{reportData[index]}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </main>
@@ -91,4 +103,6 @@ export default function Chart2() {
             </footer>
         </div>
     );
-}
+};
+
+export default StatisticalDataReport;

@@ -3,9 +3,10 @@ import { Doughnut } from "react-chartjs-2";
 import 'chart.js/auto';
 import logo from '../Home/Icon.png'; // Replace with the correct path to your logo
 import userImage from '../Home/Icon.png'; // Replace with the correct path to your user image
+import { Link } from 'react-router-dom';
 
 const data = {
-    labels: ["Road Damage", "Unmaintained Park", "Streetlight Out", "Damaged Sidewalk", "Clogger Drain"],
+    labels: ["Road Damage", "Unmaintained Park", "Streetlight Out", "Damaged Sidewalk", "Clogged Drain"],
     datasets: [
         {
             label: "Reports",
@@ -38,9 +39,9 @@ export default function Chart1() {
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4">Statistical Data Report</h2>
 
                     <div className="flex flex-col sm:flex-row justify-around mb-6 sm:mb-8">
-                        <button className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Reports by Category</button>
-                        <button className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Reports Completion Status</button>
-                        <button className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Number of Report per Months</button>
+                        <Link to="/chart1" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Reports by Category</Link>
+                        <Link to="/chart2" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Reports Completion Status</Link>
+                        <Link to="/statistical-data-report" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Number of Reports per Month</Link>
                     </div>
 
                     <div className="flex justify-center mb-6 sm:mb-8 h-80 w-full">
@@ -77,7 +78,7 @@ export default function Chart1() {
                                     <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-right">1,000</td>
                                 </tr>
                                 <tr>
-                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">Clogger Drain</td>
+                                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">Clogged Drain</td>
                                     <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-right">1,000</td>
                                 </tr>
                             </tbody>
@@ -89,8 +90,6 @@ export default function Chart1() {
             <footer className="p-4 bg-white shadow-md mt-4 flex justify-between text-xs sm:text-sm">
                 <div className="space-x-2 sm:space-x-4">
                     <a href="#" className="text-gray-600 hover:text-gray-800">Liputan6 News</a>
-                    <a href="#" className="text-gray-600 hover:text-gray-800">Liputan6 News</a>
-                    <a href="#" className="text-gray-600 hover:text-gray-800">MetroTv</a>
                     <a href="#" className="text-gray-600 hover:text-gray-800">MetroTv</a>
                 </div>
                 <div className="space-x-2 sm:space-x-4">
