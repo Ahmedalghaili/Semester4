@@ -23,10 +23,10 @@ export default function Chart1() {
             <header className="flex justify-between items-center p-4 bg-white shadow-md">
                 <img src={logo} alt="Logo" className="h-8 w-auto" />
                 <nav className="space-x-4 text-sm">
-                    <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Report</a>
-                    <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Statistics</a>
-                    <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Complaints</a>
-                    <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
+                    <Link to="/report" className="text-gray-700 hover:text-blue-600 font-medium">Report</Link>
+                    <Link to="/chart1" className="text-gray-700 hover:text-blue-600 font-medium">Statistics</Link>
+                    <Link to="/view-complaints" className="text-gray-700 hover:text-blue-600 font-medium">Complaints</Link>
+                    <Link to="/about" className="text-gray-700 hover:text-blue-600 font-medium">About</Link>
                 </nav>
                 <div className="flex items-center space-x-2 text-sm">
                     <span className="text-gray-700 font-medium">Dirga</span>
