@@ -16,32 +16,30 @@ import Chart1 from './Report/Chart1.jsx'
 import Chart2 from './Report/Chart2.jsx'
 import StatisticalDataReport from './Report/StatisticalDataReport.jsx';
 import ViewComplaints from './ComplaintCard/ViewComplaints.jsx';
-
+import ComplaintDetails from './ComplaintDetails'
 function App() {
   return (
 
-    // <ViewComplaints />
-
-     <Router>
-            <Routes>
-                <Route path="/chart1" element={<Chart1 />} />
-                <Route path="/chart2" element={<Chart2 />} />
-                <Route path="/" element={<StatisticalDataReport />} />
-                <Route path="/view-complaints" element={<ViewComplaints />} />
-                <Route path="/Report" element={<Report1 />} />
-
-
-            </Routes>
-        </Router>
     // <Router>
     //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/login" element={<Example />} />
-    //     <Route path="/register" element={<Registartion />} />
-    //     <Route path="/report" element={<ReportPage />} />
-    //     <Route path="/user" element={<ReportPage />} />
+    //     <Route path="/chart1" element={<Chart1 />} />
+    //     <Route path="/chart2" element={<Chart2 />} />
+    //     <Route path="/statistical-data-report" element={<StatisticalDataReport />} />
+    //     <Route path="/view-complaints/*" element={<ViewComplaints />} />
+    //     <Route path="/report" element={<Report1 />} />
+    //     <Route path="/" element={<Report1 />} />
+
     //   </Routes>
     // </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Example />} />
+        <Route path="/register" element={<Registartion />} />
+        <Route path="/report" element={<Report1 />} />
+        <Route path="/user" element={<ReportPage />} />
+      </Routes>
+    </Router>
   );
 }
 
