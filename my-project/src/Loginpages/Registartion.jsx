@@ -1,6 +1,7 @@
 
 import React from "react"
 import imag from '../Home/aimg.jpg';
+import icon from '../Home/Icon.png'
 
 export default function Registartion() {
 return (
@@ -17,7 +18,7 @@ return (
         <div>
           <img
             className="h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+            src={icon}
             alt="Workflow"
           />
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create your account</h2>

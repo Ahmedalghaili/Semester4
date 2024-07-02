@@ -27,8 +27,8 @@ export default function Home() {
                         <div className="flex lg:flex-1">
                             <a href="#" className="-m-1.5 p-1.5">
                                 <span className="sr-only">Your Company</span>
-                                <img className="h-8 w-auto" src={icon} alt="" />
-                            </a>
+                                <img className="h-8 w-auto ring ring-white ring-opacity-50 ring-offset-2 ring-offset-gray-300 rounded-full" src={icon} alt="" />
+                                </a>
                         </div>
                         <div className="flex lg:hidden">
                             <button
