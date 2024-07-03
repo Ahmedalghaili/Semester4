@@ -48,7 +48,7 @@ export default function Home() {
                                 </Link>
                             </div>
                             <div >
-                                <Link to="/LoginA">
+                                <Link to="/admin/Login">
                                     <a
                                         href="#"
                                         className="rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

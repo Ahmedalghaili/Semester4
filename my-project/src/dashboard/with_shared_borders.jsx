@@ -1,17 +1,17 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid'; // Updated imports
+// Updated stats component
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid';
 
 const stats = [
-  { name: 'Total Active User', stat: '71,897', },
-  { name: 'Total Reports', stat: '58.16%',  },
-  { name: 'Total Completed Reports', stat: '24.57%',  },
+  { name: 'Total Active User', stat: '71,897' },
+  { name: 'Total Reports', stat: '58.16%' },
+  { name: 'Total Completed Reports', stat: '24.57%' },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+export default function StatsExample() {
   return (
     <div>
       <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
@@ -23,7 +23,6 @@ export default function Example() {
                 {item.stat}
                 <span className="ml-2 text-sm font-medium text-gray-500">from {item.previousStat}</span>
               </div>
-
               <div
                 className={classNames(
                   item.changeType === 'increase' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
@@ -31,17 +30,16 @@ export default function Example() {
                 )}
               >
                 {item.changeType === 'increase' ? (
-                  <ArrowUpIcon // Updated icon component
+                  <ArrowUpIcon
                     className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500"
                     aria-hidden="true"
                   />
                 ) : (
-                  <ArrowDownIcon // Updated icon component
+                  <ArrowDownIcon
                     className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-red-500"
                     aria-hidden="true"
                   />
                 )}
-
                 <span className="sr-only">{item.changeType === 'increase' ? 'Increased' : 'Decreased'} by</span>
                 {item.change}
               </div>

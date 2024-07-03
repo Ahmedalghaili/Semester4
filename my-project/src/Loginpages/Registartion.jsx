@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import imag from '../Home/aimg.jpg';
 import icon from '../Home/Icon.png';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Registration() {
   const [name, setName] = useState('');
@@ -10,6 +10,7 @@ export default function Registration() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,12 +20,14 @@ export default function Registration() {
     }
 
     try {
-      const response = await axios.post('http://localhost/register.php', {
+      const response = await axios.post('http://localhost/semester4/my-project/src/Loginpages/register.php', {
         name,
         email,
         password
       });
       setMessage(response.data.message);
+      navigate('/login');
+
     } catch (error) {
       setMessage('Error registering user');
     }
