@@ -17,6 +17,8 @@
 import React from "react"
 import imag from '../Home/aimg.jpg';
 import { Link } from "react-router-dom";
+import icon from '../Home/Icon.png'
+
 export default function Example() {
   return (
     <div className="min-h-screen bg-white flex">
@@ -25,13 +27,13 @@ export default function Example() {
           <div>
             <img
               className="h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              src={icon}
               alt="Workflow"
             />
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
             <p className="mt-2 text-sm text-gray-600">
               Or{' '}
-              <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <Link to="/registerU" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Make new Account
               </Link>
             </p>
@@ -128,8 +130,8 @@ export default function Example() {
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
                     Sign in
                   </button>
                 </div>

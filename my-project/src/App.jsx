@@ -9,17 +9,25 @@ import Chart1 from './Report/Chart1.jsx';
 import Chart2 from './Report/Chart2.jsx';
 import StatisticalDataReport from './Report/StatisticalDataReport.jsx';
 import ViewComplaints from './ComplaintCard/ViewComplaints.jsx';
-import User from './Report/User.jsx'; // Ensure the User component is properly imported
 import AboutUs from './ComplaintCard/AboutUs.jsx'
+import Amin from './dashboard/brand_sidebar.jsx'
+import LoginAdmin from './dashboard/LoginA.jsx'
+import RegistrationA from './dashboard/RegistartionA.jsx'
+
 function App() {
   return (
 
+   
 
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Example />} />
-        <Route path="/register" element={<Registration />} />
+        <Route path="/registerU" element={<Registration />} />
+
+        <Route path="/LoginA" element={<LoginAdmin />} />
+        <Route path="/registerA" element={<RegistrationA />} />
+
         <Route path="/report" element={<Report1 />} />
         <Route path="/chart1" element={<Chart1 />} />
         <Route path="/chart2" element={<Chart2 />} />
@@ -27,6 +35,8 @@ function App() {
         <Route path="/view-complaints/*" element={<ViewComplaints />} /> {/* Add trailing * */}
         <Route path="/user" element={<Report1 />} /> {/* Ensure this route is defined */}
         <Route path="/about" element={<AboutUs />} /> {/* Add this route */}
+            <Route path="#" element={<Amin/>} /> {/* Add this route */}
+
 
       </Routes>
     </Router>

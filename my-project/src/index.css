@@ -3,19 +3,29 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes scroll {
+@keyframes scroll-left {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
-.animate-scroll {
-  display: flex;
-  animation: scroll 15s linear infinite;
+@layer utilities {
+  .scrolling-container {
+    @apply overflow-hidden relative bg-gray-900 w-full py-4;
+  }
+  .scrolling-inner {
+    @apply flex whitespace-nowrap items-center;
+    animation: scroll-left 20s linear infinite;
+  }
+  .scrolling-item {
+    @apply mx-4 w-32 h-32 p-2 border border-gray-300 bg-white shadow-lg rounded-lg flex-none;
+  }
 }
+
+
 /*  
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -98,7 +108,7 @@ button:focus-visible {
   width: 50%;
   background-color:aquamarine;
 } */
-
+/* 
 @media screen and (max-width: 500) {
   #p1{
       display: inline;
@@ -107,4 +117,4 @@ button:focus-visible {
       background-color: black;
   }
   
-}
+}  */

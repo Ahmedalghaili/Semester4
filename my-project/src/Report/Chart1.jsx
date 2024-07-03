@@ -26,9 +26,9 @@ export default function Chart1() {
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4">Statistical Data Report</h2>
 
                     <div className="flex flex-col sm:flex-row justify-around mb-6 sm:mb-8">
-                        <Link to="/chart1" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Reports by Category</Link>
-                        <Link to="/chart2" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Reports Completion Status</Link>
-                        <Link to="/statistical-data-report" className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs sm:text-sm">Number of Reports per Month</Link>
+                        <Link to="/chart1" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs sm:text-sm">Reports by Category</Link>
+                        <Link to="/chart2" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs sm:text-sm">Reports Completion Status</Link>
+                        <Link to="/statistical-data-report" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-400 text-xs sm:text-sm">Number of Reports per Month</Link>
                     </div>
 
                     <div className="flex justify-center mb-6 sm:mb-8 h-80 w-full">
