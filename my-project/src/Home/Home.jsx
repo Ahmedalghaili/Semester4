@@ -9,18 +9,13 @@ import Peg3 from './Peg3';
 import Tape from './Tape';
 import Footer from './Footer';
 
-const navigation = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: '********', href: '#' },
-    { name: '*******', href: '#' },
-];
+
 
 export default function Home() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <div>
+        <div className='mt-1'>
             <div className="inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
                 <header className="absolute inset-x-0 top-0 z-50">
                     <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -52,11 +47,11 @@ export default function Home() {
                                     </a>
                                 </Link>
                             </div>
-                            <div>
+                            <div >
                                 <Link to="/LoginA">
                                     <a
                                         href="#"
-                                        className="text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
                                          Login As Administrator
                                     </a>
@@ -143,10 +138,10 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div ><Tape/></div>
-            <div  ><Peg2 /></div>
-            <div><Peg3 /></div>
-            <div><Footer /></div>
+            <div className='mt-2'><Tape/></div>
+            <div className='mt-2' ><Peg2 /></div>
+            <div className='mt-2' ><Peg3 /></div>
+            <div className='mt-2'><Footer /></div>
 
 
 
