@@ -140,9 +140,7 @@ export default function Home() {
                                     >
                                         Start Reporting
                                     </a>
-                                    <a href="#" className="text-sm font-semibold leading-6 text-white hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                                        Learn More <span aria-hidden="true">→</span>
-                                    </a>
+                                  
                                 </Link>
                             </div>
                         </div>

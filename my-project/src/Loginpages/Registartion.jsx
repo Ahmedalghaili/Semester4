@@ -2,6 +2,7 @@
 import React from "react"
 import imag from '../Home/aimg.jpg';
 import icon from '../Home/Icon.png'
+import { Link } from "react-router-dom";
 
 export default function Registartion() {
 return (
@@ -24,9 +25,9 @@ return (
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Create your account</h2>
           <p className="mt-2 text-sm text-gray-600">
             Or{' '}
-            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link to="/Login" className="font-medium text-indigo-600 hover:text-indigo-500">
               sign in to your existing account
-            </a>
+            </Link>
           </p>
         </div>
 

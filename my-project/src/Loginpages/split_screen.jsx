@@ -16,6 +16,7 @@
 */
 import React from "react"
 import imag from '../Home/aimg.jpg';
+import { Link } from "react-router-dom";
 export default function Example() {
   return (
     <div className="min-h-screen bg-white flex">
@@ -30,9 +31,9 @@ export default function Example() {
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
             <p className="mt-2 text-sm text-gray-600">
               Or{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Make new Account
-              </a>
+              </Link>
             </p>
           </div>
 
