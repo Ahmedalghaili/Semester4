@@ -18,7 +18,9 @@ export default function Example() {
         password
       });
       setMessage(response.data.message);
+      if (response.data.message === "Login successful!") {
         navigate('/admin/'); // Redirect to admin page
+      }
     } catch (error) {
       setMessage('Error logging in');
     }
@@ -95,7 +97,7 @@ export default function Example() {
                   Sign in
                 </button>
               </div>
-              {message && <p className="mt-2 text-sm text-red-600">{message}</p>}
+              {message && <p className="mt-2 text-center text-sm text-red-600">{message}</p>}
             </form>
           </div>
         </div>

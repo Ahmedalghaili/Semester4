@@ -18,9 +18,11 @@ import LoginAdmin from './dashboard/LoginA.jsx';
 import RegistrationA from './dashboard/RegistartionA.jsx';
 import FetchDataFromPHP from './FetchDataFromPHP.jsx'; // Import the new component
 import EditProblem from './dashboard/EditProblem.jsx';
+import { UserProvider } from './components/UserContext.jsx'; // Import the UserProvider
 
 function App() {
   return (
+    <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -42,6 +44,8 @@ function App() {
         <Route path="/fetch-data" element={<FetchDataFromPHP />} /> {/* Add new route */}
       </Routes>
     </Router>
+    </UserProvider>
+    
   );
 }
 

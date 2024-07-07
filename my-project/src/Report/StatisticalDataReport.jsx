@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ApexCharts from 'react-apexcharts';
 import { Link } from 'react-router-dom';
-
 import Header from './Header';
+
 const StatisticalDataReport = () => {
+  const [series, setSeries] = useState([]);
+  const [dates, setDates] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost/semester4/my-project/src/Report/statisticalDataReport.php')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched data:', data);  // Log fetched data for debugging
+        if (data.length > 0) {
+          setSeries([{
+            name: 'Reports',
+            data: data.map(item => item.count)
+          }]);
+          setDates(data.map(item => item.date));
+        } else {
+          setSeries([]);
+          setDates([]);
+        }
+      })
+      .catch(error => console.error('Error fetching data: ', error));
+  }, []);
+
   const options = {
     chart: {
-      type: 'area',
+      type: 'line',
       height: 350,
       zoom: {
         enabled: false
@@ -16,68 +38,53 @@ const StatisticalDataReport = () => {
       enabled: false
     },
     stroke: {
-      curve: 'smooth'
+      curve: 'smooth',
+      width: 2
     },
     xaxis: {
-      type: 'category',
-      categories: ['January', 'February', 'March', 'April', 'May']
+      type: 'datetime',
+      categories: dates,
+      labels: {
+        format: 'MMM dd'
+      }
     },
     yaxis: {
       title: {
         text: 'Number of Reports'
       }
     },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.9,
-        stops: [0, 90, 100]
-      }
-    },
     tooltip: {
       x: {
-        format: 'dd/MM/yy HH:mm'
+        format: 'dd MMM yyyy'
       },
     },
   };
 
-  const series = [{
-    name: 'Reports',
-    data: [10, 55, 10, 12.5, 12.5]
-  }];
-
-  const months = ['January', 'February', 'March', 'April', 'May'];
-  const reportData = series[0].data;
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header/>
-
+      <Header />
       <main className="flex-grow flex flex-col items-center py-4 px-2 sm:px-4 lg:px-6">
         <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-4 sm:p-6 lg:p-8">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4">Statistical Data Report</h2>
-
           <div className="flex flex-col sm:flex-row justify-around mb-6 sm:mb-8">
-          <Link to="/chart1" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs sm:text-sm">Reports by Category</Link>
-                        <Link to="/chart2" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs sm:text-sm">Reports Completion Status</Link>
-                        <Link to="/statistical-data-report" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-400 text-xs sm:text-sm">Number of Reports per Month</Link>
+            <Link to="/chart1" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs sm:text-sm">Reports by Category</Link>
+            <Link to="/chart2" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs sm:text-sm">Reports Completion Status</Link>
+            <Link to="/statistical-data-report" className="px-3 py-1 sm:px-4 sm:py-2 bg-green-600 text-white rounded-md hover:bg-green-400 text-xs sm:text-sm">Number of Reports per Month</Link>
           </div>
-
           <div className="mt-4">
-            <ApexCharts options={options} series={series} type="area" height={350} />
+            {series.length > 0 && (
+              <ApexCharts options={options} series={series} type="line" height={350} />
+            )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {months.map((month, index) => (
+            {dates.map((date, index) => (
               <div key={index} className="bg-white shadow p-4 rounded">
-                {month} <span className="text-2xl">{reportData[index]}</span>
+                {date} <span className="text-2xl">{series[0]?.data[index]}</span>
               </div>
             ))}
           </div>
         </div>
       </main>
-
       <footer className="p-4 bg-white shadow-md mt-4 flex justify-between text-xs sm:text-sm">
         <div className="space-x-2 sm:space-x-4">
           <a href="#" className="text-gray-600 hover:text-gray-800">Liputan6 News</a>

@@ -27,13 +27,14 @@ export default function RegistrationA() {
         password
       });
       setMessage(response.data.message);
-      navigate('/admin/login');
-
+      if (response.data.message === "Admin registered successfully!") {
+        navigate('/admin/Login');
+      }
     } catch (error) {
-      setMessage('Error registering user');
+      setMessage('Error registering admin');
     }
   };
-  
+
   return (
     <div className="min-h-screen bg-white flex">
       <div className="hidden lg:block relative w-0 flex-1">
@@ -134,6 +135,7 @@ export default function RegistrationA() {
                     Register
                   </button>
                 </div>
+                {message && <p className="mt-2 text-center text-sm text-red-600">{message}</p>}
               </form>
             </div>
           </div>

@@ -28,6 +28,25 @@ if (isset($data->name) && isset($data->email) && isset($data->password)) {
     $email = $data->email;
     $password = password_hash($data->password, PASSWORD_BCRYPT); // Encrypt the password
 
+    // Check if email already exists
+    $stmt = $conn->prepare("SELECT id FROM admin WHERE email = ?");
+    if ($stmt === false) {
+        echo json_encode(array("message" => "Prepare failed: " . $conn->error));
+        exit;
+    }
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        echo json_encode(array("message" => "Email already exists!"));
+        $stmt->close();
+        $conn->close();
+        exit;
+    }
+    $stmt->close();
+
+    // Insert new admin
     $stmt = $conn->prepare("INSERT INTO admin (name, email, password) VALUES (?, ?, ?)");
     if ($stmt === false) {
         echo json_encode(array("message" => "Prepare failed: " . $conn->error));
@@ -42,7 +61,7 @@ if (isset($data->name) && isset($data->email) && isset($data->password)) {
 
     $exec = $stmt->execute();
     if ($exec) {
-        echo json_encode(array("message" => "User registered successfully!"));
+        echo json_encode(array("message" => "Admin registered successfully!"));
     } else {
         echo json_encode(array("message" => "Execute failed: " . $stmt->error));
     }

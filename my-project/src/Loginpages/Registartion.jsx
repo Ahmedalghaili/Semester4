@@ -9,8 +9,13 @@ export default function Registration() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,16 +24,28 @@ export default function Registration() {
       return;
     }
 
-    try {
-      const response = await axios.post('http://localhost/semester4/my-project/src/Loginpages/register.php', {
-        name,
-        email,
-        password
-      });
-      setMessage(response.data.message);
-      navigate('/login');
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    if (image) {
+      formData.append('image', image);
+    }
 
+    try {
+      console.log("Sending form data:", formData);
+      const response = await axios.post('http://localhost/semester4/my-project/src/Loginpages/register.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log("Response data:", response.data);
+      setMessage(response.data.message);
+      if (response.data.message === "User registered successfully!") {
+        navigate('/login');
+      }
     } catch (error) {
+      console.error("Error registering user:", error);
       setMessage('Error registering user');
     }
   };
@@ -109,6 +126,19 @@ export default function Registration() {
                       required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="image" className="block text-sm font-medium text-gray-700">Upload Image</label>
+                  <div className="mt-1">
+                    <input
+                      id="image"
+                      name="image"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
