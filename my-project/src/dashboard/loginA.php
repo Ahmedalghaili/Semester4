@@ -20,11 +20,6 @@ if (isset($data->email) && isset($data->password)) {
     $password = $data->password;
 
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
-    if ($stmt === false) {
-        echo json_encode(array("message" => "Prepare failed: " . $conn->error));
-        exit;
-    }
-
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

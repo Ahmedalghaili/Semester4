@@ -1,35 +1,31 @@
-const timeline = [
-  {
-    id: 1,
-    content: 'The report is being verified',
-    iconBackground: 'bg-black',
-    isActive: true,
-  },
-  {
-    id: 2,
-    content: 'The report is being followed up by the relevant parties',
-    iconBackground: 'bg-gray-400',
-    isActive: false,
-  },
-  {
-    id: 3,
-    content: 'The problems in this report have been resolved by the relevant parties',
-    iconBackground: 'bg-gray-400',
-    isActive: false,
-  },
-  {
-    id: 4,
-    content: 'Completed',
-    iconBackground: 'bg-gray-400',
-    isActive: false,
-  },
-];
+import React from 'react';
 
+// Utility function to conditionally combine class names
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function SimpleWithIcons() {
+// Function to determine the background color based on status
+function getStatusBgColor(status) {
+  switch (status) {
+    case 'on-progress':
+      return 'bg-black';
+    case 'verified':
+    case 'solved':
+      return 'bg-gray-400';
+    default:
+      return 'bg-gray-400';
+  }
+}
+
+// Function to determine if an event is active based on status
+function isEventActive(status) {
+  return status === 'on-progress';
+}
+
+// Functional component that renders a timeline with icons
+function SimpleWithIcons({ timeline }) {
+  console.log(timeline);
   return (
     <div className="flow-root">
       <ul className="-mb-8">
@@ -43,11 +39,11 @@ export default function SimpleWithIcons() {
                 <div>
                   <span
                     className={classNames(
-                      event.iconBackground,
+                      getStatusBgColor(event.status),
                       'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
                     )}
                   >
-                    {event.isActive ? (
+                    {isEventActive(event.status) ? (
                       <span className="block h-5 w-5 bg-black rounded-full" aria-hidden="true" />
                     ) : (
                       <span className="block h-5 w-5 bg-gray-400 rounded-full" aria-hidden="true" />
@@ -56,7 +52,7 @@ export default function SimpleWithIcons() {
                 </div>
                 <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                   <div>
-                    <p className={classNames("text-sm", event.isActive ? "text-black" : "text-gray-500")}>
+                    <p className={classNames("text-sm", isEventActive(event.status) ? "text-black" : "text-gray-500")}>
                       {event.content}
                     </p>
                   </div>
@@ -68,4 +64,28 @@ export default function SimpleWithIcons() {
       </ul>
     </div>
   );
+}
+
+// Sample data for the timeline with status field
+const timelineData = [
+  {
+    id: 1,
+    content: 'The report is being verified',
+    status: 'on-progress',
+  },
+  {
+    id: 2,
+    content: 'The problems in this report have been resolved by the relevant parties',
+    status: 'verified',
+  },
+  {
+    id: 3,
+    content: 'Completed',
+    status: 'solved',
+  },
+];
+
+// Main application component
+export default function App() {
+  return <SimpleWithIcons timeline={timelineData} />;
 }

@@ -7,25 +7,23 @@ const ComplaintCard = ({ complaint }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate(`/view-complaints/complaint/${complaint.id}`, { state: { complaint } });
+        navigate(`/view-complaints/complaint/${complaint.id}`, { state: { complaintId: complaint.id } });
     };
 
     return (
         <div className="border-b border-gray-200 py-4">
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
-                    <img src="https://i.imgur.com/zQZSWrt.jpg" alt="User" className="rounded-full w-8 h-8" />
-                    <span className="text-gray-700 font-medium">{complaint.user}</span>
-                    <span className="text-gray-500 text-sm">{complaint.time}</span>
+                    <img src={complaint.user_photo} alt="User" className="rounded-full w-8 h-8" />
+                    <span className="text-gray-700 font-medium">${complaint.state}</span>
+                    <span className="text-gray-500 text-sm">{new Date(complaint.created_at).toLocaleString()}</span>
                     <span className="text-gray-500 text-sm">{complaint.category}</span>
-                    <span className={`${complaint.statusColor} text-sm`}>{complaint.status}</span>
+                    <span className={`${complaint.state} text-sm`}>{complaint.state}</span>
                 </div>
             </div>
-            <h3 className="text-lg font-semibold mt-2">
-                Complaints and Complaints about Old PT Operators Which Harm Lecturers' Rights
-            </h3>
+            <h3 className="text-lg font-semibold mt-2">{complaint.title}</h3>
             <p className="text-gray-700 mt-2 cursor-pointer" onClick={handleNavigate}>
-                I would like to report issues concerning the treatment of lecturers by old PT operators at this institution. There are several issues that have infringed upon our rights as lecturers, including reduced teaching privileges, delayed honorarium payments, and lack of transparency in academic policies affecting our overall working conditions.
+                {complaint.description}
             </p>
             <div className="flex justify-between items-center mt-2">
                 <div className="flex space-x-4 text-sm">
@@ -35,7 +33,7 @@ const ComplaintCard = ({ complaint }) => {
                     </button>
                     <button className="text-blue-600 flex items-center">
                         <FontAwesomeIcon icon={faThumbsUp} className="mr-1" />
-                        Up Vote
+                        Up Vote <span className="ml-1">{complaint.likes}</span>
                     </button>
                     <button className="text-blue-600 flex items-center">
                         <FontAwesomeIcon icon={faShare} className="mr-1" />

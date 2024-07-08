@@ -1,55 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const tabs = [
-  { name: 'Problem Solved', current: true },
-  { name: 'On-Progress', current: false },
-  { name: 'Not Verified', current: false },
-];
-
-const problemsSolved = [
-  { id: 1, name: 'Solved Problem 1', reportId: '111111', status: 'Problem Solved', location: 'Location 1', reportedBy: 'User 1', complaint: 'Complaint 1', description: 'Description 1' },
-  { id: 2, name: 'Solved Problem 2', reportId: '222222', status: 'Problem Solved', location: 'Location 2', reportedBy: 'User 2', complaint: 'Complaint 2', description: 'Description 2' },
-  { id: 3, name: 'Solved Problem 3', reportId: '333333', status: 'Problem Solved', location: 'Location 3', reportedBy: 'User 3', complaint: 'Complaint 3', description: 'Description 3' },
-];
-
-const problemsOnProgress = [
-  { id: 4, name: 'On-Progress Problem 1', reportId: '444444', status: 'On-Progress', location: 'Location 4', reportedBy: 'User 4', complaint: 'Complaint 4', description: 'Description 4' },
-  { id: 5, name: 'On-Progress Problem 2', reportId: '555555', status: 'On-Progress', location: 'Location 5', reportedBy: 'User 5', complaint: 'Complaint 5', description: 'Description 5' },
-  { id: 6, name: 'On-Progress Problem 3', reportId: '666666', status: 'On-Progress', location: 'Location 6', reportedBy: 'User 6', complaint: 'Complaint 6', description: 'Description 6' },
-];
-
-const problemsNotVerified = [
-  { id: 7, name: 'Not Verified Problem 1', reportId: '777777', status: 'Not Verified', location: 'Location 7', reportedBy: 'User 7', complaint: 'Complaint 7', description: 'Description 7' },
-  { id: 8, name: 'Not Verified Problem 2', reportId: '888888', status: 'Not Verified', location: 'Location 8', reportedBy: 'User 8', complaint: 'Complaint 8', description: 'Description 8' },
-  { id: 9, name: 'Not Verified Problem 3', reportId: '999999', status: 'Not Verified', location: 'Location 9', reportedBy: 'User 9', complaint: 'Complaint 9', description: 'Description 9' },
-];
+import ProblemSolved from './ProblemSolved';
+import OnProgress from './OnProgress';
+import NotVerified from './NotVerified';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function MonitorProblems() {
+  const [problems, setProblems] = useState([]);
+  const [currentTab, setCurrentTab] = useState('solved');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetchProblems(currentTab);
+  }, [currentTab]);
+
+  const fetchProblems = (status) => {
+    fetch(`http://localhost/semester4/my-project/src/components/fetchProblems.php?status=${status}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched data:', data); // Log fetched data
+        setProblems(data);
+      })
+      .catch(error => console.error('Error fetching problems:', error));
+  };
+
   const handleProblemClick = (id, status) => {
-    navigate(`/admin/edit-problem/${id}`, { state: { status } });
+    const selectedProblem = problems.find(problem => problem.id === id);
+    navigate(`/admin/edit-problem/${id}`, { state: { problem: selectedProblem } });
   };
 
-  const getProblems = () => {
-    switch (tabs.find(tab => tab.current).name) {
-      case 'Problem Solved':
-        return problemsSolved;
-      case 'On-Progress':
-        return problemsOnProgress;
-      case 'Not Verified':
-        return problemsNotVerified;
-      default:
-        return [];
-    }
+  const countProblems = (state) => {
+    return problems.filter(problem => problem.status === state).length;
   };
 
-  const problems = getProblems();
+  const tabs = [
+    { name: 'solved', displayName: `Problem Solved `, current: currentTab === 'solved' },
+    { name: 'on-progress', displayName: `On-Progress `, current: currentTab === 'on-progress' },
+    { name: 'verified', displayName: `Not Verified `, current: currentTab === 'verified' },
+  ];
 
   return (
     <div className="p-4">
@@ -58,32 +49,21 @@ export default function MonitorProblems() {
         {tabs.map((tab) => (
           <button
             key={tab.name}
-            onClick={() => handleProblemClick(problems.find(problem => problem.status === tab.name).id, tab.name)}
+            onClick={() => setCurrentTab(tab.name)}
             className={classNames(
-              tab.name === tabs.find(tab => tab.current).name
+              tab.current
                 ? 'border-green-500 text-green-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'w-full py-4 px-1 text-center border-b-2 font-medium text-sm'
             )}
           >
-            {tab.name}
+            {tab.displayName}
           </button>
         ))}
       </div>
-      <div className="mt-4">
-        {problems.length > 0 ? (
-          problems.map((problem) => (
-            <div key={problem.id} className="border p-4 mb-2 cursor-pointer" onClick={() => handleProblemClick(problem.id, problem.status)}>
-              <span className="text-blue-500 hover:underline">
-                {problem.name}
-              </span>
-              <div>Report Id: {problem.reportId}</div>
-            </div>
-          ))
-        ) : (
-          <div>No problems found for the selected tab.</div>
-        )}
-      </div>
+      {currentTab === 'solved' && <ProblemSolved problems={problems} handleProblemClick={handleProblemClick} />}
+      {currentTab === 'on-progress' && <OnProgress problems={problems} handleProblemClick={handleProblemClick} />}
+      {currentTab === 'verified' && <NotVerified problems={problems} handleProblemClick={handleProblemClick} />}
     </div>
   );
 }

@@ -1,17 +1,15 @@
-// src/components/Sidebar.jsx
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { FolderIcon, HomeIcon, UsersIcon, Bars3Icon as MenuIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from 'react-router-dom';
 import icon from '../Home/Icon.jpeg';
 
 const navigation = [
   { name: 'Dashboard', href: '/admin/', icon: HomeIcon },
   { name: 'Monitor Problems', href: '/admin/monitor-problems', icon: UsersIcon },
- 
 ];
 
-function classNames(...classes) {
+const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
 }
 
@@ -31,7 +29,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+            <Dialog className="fixed inset-0 bg-gray-600 bg-opacity-75" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}

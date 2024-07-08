@@ -15,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $conn->real_escape_string($_POST['description']);
     $user_id = $conn->real_escape_string($_POST['user_id']); // Added user_id
     $image_path = "";
+    $state = "Verified";
+
 
     // Debugging output
     echo "Received user_id: $user_id";
@@ -52,8 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert data into the database using prepared statements
-    $stmt = $conn->prepare("INSERT INTO complaint (category, title, region, description, image_path, user_id) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $category, $title, $region, $description, $image_path, $user_id); // Added user_id
+    $stmt = $conn->prepare("INSERT INTO complaint (category, title, region, description, image_path, user_id, state) VALUES (?, ?, ?, ?, ?, ?,?)");
+    $stmt->bind_param("sssssss", $category, $title, $region, $description, $image_path, $user_id , $state); // Added user_id
 
     if ($stmt->execute()) {
         echo "New complaint submitted successfully";

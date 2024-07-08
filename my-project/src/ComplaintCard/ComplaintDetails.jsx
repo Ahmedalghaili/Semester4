@@ -1,91 +1,29 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faThumbsUp, faShare } from '@fortawesome/free-solid-svg-icons';
-
-const timeline = [
-  {
-    id: 1,
-    content: 'The report is being verified',
-    iconBackground: 'bg-black',
-    isActive: true,
-  },
-  {
-    id: 2,
-    content: 'The report is being followed up by the relevant parties',
-    iconBackground: 'bg-gray-400',
-    isActive: false,
-  },
-  {
-    id: 3,
-    content: 'The problems in this report have been resolved by the relevant parties',
-    iconBackground: 'bg-gray-400',
-    isActive: false,
-  },
-  {
-    id: 4,
-    content: 'Completed',
-    iconBackground: 'bg-gray-400',
-    isActive: false,
-  },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
-function SimpleWithIcons() {
-  return (
-    <div className="flow-root">
-      <ul className="-mb-8">
-        {timeline.map((event, eventIdx) => (
-          <li key={event.id}>
-            <div className="relative pb-8">
-              {eventIdx !== timeline.length - 1 ? (
-                <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
-              ) : null}
-              <div className="relative flex space-x-3">
-                <div>
-                  <span
-                    className={classNames(
-                      event.iconBackground,
-                      'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
-                    )}
-                  >
-                    {event.isActive ? (
-                      <span className="block h-5 w-5 bg-black rounded-full" aria-hidden="true" />
-                    ) : (
-                      <span className="block h-5 w-5 bg-gray-400 rounded-full" aria-hidden="true" />
-                    )}
-                  </span>
-                </div>
-                <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                  <div>
-                    <p className={classNames("text-sm", event.isActive ? "text-black" : "text-gray-500")}>
-                      {event.content}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+import SimpleWithIcons from './SimpleWithIcons';
 
 const ComplaintDetails = () => {
-    const location = useLocation();
-    const { complaint } = location.state;
+    const { id } = useParams();
+    const [complaint, setComplaint] = useState(null);
     const [showProgress, setShowProgress] = useState(false);
     const [showComments, setShowComments] = useState(false);
-    const [comments, setComments] = useState([
-        { id: 1, user: 'Saipul jamil', content: 'yayayaya saya setuju', date: '20-12-2024' },
-        { id: 2, user: 'Lendra Churvanof', content: 'relate bgt!', date: '20-12-2024' },
-        { id: 3, user: 'Kak Gem', content: 'kzl deh sama pemerintah yang gaperna peka sma warga nya sybul', date: '20-12-2024' },
-    ]);
+    const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+
+    useEffect(() => {
+        axios.get(`http://localhost/semester4/my-project/src/ComplaintCard/fetch_complaint.php?id=${id}`)
+            .then(response => {
+                setComplaint(response.data);
+                setComments(response.data.comments); // Assuming comments are part of the response
+                console.log(response.data.user_photo); // Log user_photo
+            })
+            .catch(error => {
+                console.error("There was an error fetching the complaint data!", error);
+            });
+    }, [id]);
 
     const toggleProgress = () => {
         setShowProgress(!showProgress);
@@ -113,30 +51,32 @@ const ComplaintDetails = () => {
         }
     };
 
+    if (!complaint) {
+        return <div>Loading...</div>;
+    }
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8">
             <header className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-4 sm:p-6 lg:p-8">
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4">Complaint Details</h2>
                 <div className="flex items-center space-x-2 mb-4">
-                    <img src="https://i.imgur.com/zQZSWrt.jpg" alt="User" className="rounded-full w-10 h-10" />
+                    <img src={complaint.user_photo} alt="User" className="rounded-full w-10 h-10" />
                     <div>
-                        <span className="text-gray-700 font-medium">{complaint.user}</span>
-                        <span className="text-gray-500 text-sm ml-2">{complaint.time}</span>
+                        <span className="text-gray-700 font-medium">{complaint.user_name}</span>
+                        <span className="text-gray-500 text-sm ml-2">{new Date(complaint.created_at).toLocaleString()}</span>
                         <span className="text-gray-500 text-sm ml-2">{complaint.category}</span>
+                                            <span className={`ml-4 ${complaint.state} text-sm`}>{complaint.state}</span>
+
                     </div>
-                    <span className={`ml-4 ${complaint.statusColor} text-sm`}>{complaint.status}</span>
+                    <span className={`ml-4 ${complaint.state} text-sm`}>{complaint.state}</span>
                 </div>
-                <span className="block text-gray-500 text-sm">Tracking ID: #{complaint.trackingId}</span>
-                <h3 className="text-xl font-semibold mt-2">Road hole never been fixed over a decade!</h3>
-                <p className="text-gray-700 mt-2">
-                    I would like to report issues concerning the treatment of lecturers by old PT operators at this institution. There are several issues that have infringed upon our rights as lecturers, including reduced teaching privileges, delayed honorarium payments, and lack of transparency in academic policies affecting our overall working conditions.
-                </p>
+                <h3 className="text-xl font-semibold mt-2">{complaint.title}</h3>
+                <p className="text-gray-700 mt-2">{complaint.description}</p>
                 <div className="mt-4">
                     <h4 className="text-gray-800 font-medium">Attached Files:</h4>
                     <div className="flex mt-2 space-x-2">
-                        <img src="https://i.imgur.com/zQZSWrt.jpg" alt="Attached File" className="w-16 h-16 rounded" />
-                        <img src="https://i.imgur.com/zQZSWrt.jpg" alt="Attached File" className="w-16 h-16 rounded" />
-                        <img src="https://i.imgur.com/zQZSWrt.jpg" alt="Attached File" className="w-16 h-16 rounded" />
+                        {complaint.attached_files.map((file, index) => (
+                            <img key={index} src={file} alt="Attached File" className="w-16 h-16 rounded" />
+                        ))}
                     </div>
                 </div>
                 <div className="flex justify-between items-center mt-4">
@@ -150,7 +90,7 @@ const ComplaintDetails = () => {
                         </button>
                         <button className="text-blue-600 flex items-center">
                             <FontAwesomeIcon icon={faThumbsUp} className="mr-1" />
-                            Up Vote
+                            Up Vote <span className="ml-1">{complaint.likes}</span>
                         </button>
                         <button className="text-blue-600 flex items-center">
                             <FontAwesomeIcon icon={faShare} className="mr-1" />
@@ -160,8 +100,7 @@ const ComplaintDetails = () => {
                 </div>
                 {showProgress && (
                     <div className="mt-4">
-                        <h4 className="text-gray-800 font-medium">Monitor the progress of this report:</h4>
-                        <SimpleWithIcons />
+                        <h4 className="text-gray-800 font-medium">Monitor the progress of this report: {complaint.state}</h4>
                     </div>
                 )}
                 {showComments && (

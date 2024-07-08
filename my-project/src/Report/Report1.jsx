@@ -10,7 +10,8 @@ export default function SubmitComplaint() {
     title: '',
     region: '',
     description: '',
-    file: null
+    file: null,
+    category: '', // Add category to formData
   });
   const { user } = useUser(); // Use the context to get the user
 
@@ -31,6 +32,11 @@ export default function SubmitComplaint() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      alert('User is not logged in');
+      return;
+    }
+
     const form = new FormData();
     form.append('category', category === 'Other' ? formData.category : category);
     form.append('title', formData.title);
