@@ -1,12 +1,11 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 include("../db_connect.php");
 
-// SQL query to fetch all complaints and join with users table to get user name and photo path
+// SQL query to fetch all complaints and join with users table to get user name and photo path, sorted by likes
 $sql = "
     SELECT 
         complaint.id,
@@ -24,6 +23,8 @@ $sql = "
         complaint
     JOIN 
         users ON complaint.user_id = users.id
+    ORDER BY 
+        complaint.likes DESC
 ";
 
 $result = $conn->query($sql);

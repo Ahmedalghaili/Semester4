@@ -18,7 +18,6 @@ const ComplaintDetails = () => {
             .then(response => {
                 setComplaint(response.data);
                 setComments(response.data.comments); // Assuming comments are part of the response
-                console.log(response.data.user_photo); // Log user_photo
             })
             .catch(error => {
                 console.error("There was an error fetching the complaint data!", error);
@@ -54,18 +53,19 @@ const ComplaintDetails = () => {
     if (!complaint) {
         return <div>Loading...</div>;
     }
+
+    // Update the base URL to match your server configuration
+    const baseURL = "http://localhost/semester4/my-project/src/Report/";
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8">
             <header className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-4 sm:p-6 lg:p-8">
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4">Complaint Details</h2>
                 <div className="flex items-center space-x-2 mb-4">
-                    <img src={complaint.user_photo} alt="User" className="rounded-full w-10 h-10" />
                     <div>
                         <span className="text-gray-700 font-medium">{complaint.user_name}</span>
                         <span className="text-gray-500 text-sm ml-2">{new Date(complaint.created_at).toLocaleString()}</span>
                         <span className="text-gray-500 text-sm ml-2">{complaint.category}</span>
-                                            <span className={`ml-4 ${complaint.state} text-sm`}>{complaint.state}</span>
-
                     </div>
                     <span className={`ml-4 ${complaint.state} text-sm`}>{complaint.state}</span>
                 </div>
@@ -75,7 +75,7 @@ const ComplaintDetails = () => {
                     <h4 className="text-gray-800 font-medium">Attached Files:</h4>
                     <div className="flex mt-2 space-x-2">
                         {complaint.attached_files.map((file, index) => (
-                            <img key={index} src={file} alt="Attached File" className="w-16 h-16 rounded" />
+                            <img key={index} src={`${baseURL}${file}`} alt="Attached File" className="w-16 h-16 rounded" />
                         ))}
                     </div>
                 </div>
@@ -92,15 +92,12 @@ const ComplaintDetails = () => {
                             <FontAwesomeIcon icon={faThumbsUp} className="mr-1" />
                             Up Vote <span className="ml-1">{complaint.likes}</span>
                         </button>
-                        <button className="text-blue-600 flex items-center">
-                            <FontAwesomeIcon icon={faShare} className="mr-1" />
-                            Share
-                        </button>
+                      
                     </div>
                 </div>
                 {showProgress && (
                     <div className="mt-4">
-                        <h4 className="text-gray-800 font-medium">Monitor the progress of this report: {complaint.state}</h4>
+                        The State is:{complaint.state}  
                     </div>
                 )}
                 {showComments && (
@@ -109,7 +106,6 @@ const ComplaintDetails = () => {
                         <div className="mt-2">
                             {comments.map(comment => (
                                 <div key={comment.id} className="flex items-start space-x-2 mt-2">
-                                    <div className="rounded-full bg-gray-200 w-8 h-8"></div>
                                     <div>
                                         <span className="block font-medium">{comment.user}</span>
                                         <span className="block text-gray-700">{comment.content}</span>

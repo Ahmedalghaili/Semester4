@@ -15,8 +15,8 @@ export default function Home() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <div className='mt-1'>
-            <div className="inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
+        <div className=''>
+            <div className="inset-0 bg-cover bg-center h-screen" style={{ backgroundImage: `url(${img})` }}>
                 <header className="absolute inset-x-0 top-0 z-50">
                     <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                         <div className="flex lg:flex-1">

@@ -1,13 +1,17 @@
 <?php
 
+// Set HTTP headers
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
+// Include the database connection script
 include("../db_connect.php");
 
+// Retrieve the complaint ID from the query parameters
 $complaintId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
+// SQL query to fetch complaint details and user information
 $sql = "
     SELECT 
         complaint.id,
@@ -29,46 +33,27 @@ $sql = "
         complaint.id = ?
 ";
 
+// Prepare and execute the SQL statement
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $complaintId);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Fetch the result into an associative array
 $complaint = $result->fetch_assoc() ?: [];
 
+// If complaint data exists, add additional details
 if ($complaint) {
+    // Add attached files including the image path from the database
     $complaint['attached_files'] = [
-        'https://i.imgur.com/zQZSWrt.jpg',
-        'https://i.imgur.com/zQZSWrt.jpg',
-        'https://i.imgur.com/zQZSWrt.jpg'
+        $complaint['image_path'],
     ];
 
-    $complaint['timeline'] = [
-        [
-            'id' => 1,
-            'content' => 'The report is being verified',
-            'iconBackground' => 'bg-black',
-            'isActive' => true,
-        ],
-      
-        [
-            'id' => 3,
-            'content' => 'The problems in this report have been resolved by the relevant parties',
-            'iconBackground' => 'bg-gray-400',
-            'isActive' => false,
-        ],
-        [
-            'id' => 4,
-            'content' => 'Completed',
-            'iconBackground' => 'bg-gray-400',
-            'isActive' => false,
-        ],
-    ];
-
+    // Add user comments
     $complaint['comments'] = [
         [
             'id' => 1,
-            'user' => 'Saipul jamil',
+            'user' => 'Saipul Jamil',
             'content' => 'HEY SIR',
             'date' => '20-12-2024',
         ],
@@ -87,8 +72,11 @@ if ($complaint) {
     ];
 }
 
+// Close the database connection
 $conn->close();
 
+// Output the final complaint details as JSON
 header('Content-Type: application/json');
 echo json_encode($complaint);
+
 ?>

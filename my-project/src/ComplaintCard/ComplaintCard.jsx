@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faThumbsUp, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const ComplaintCard = ({ complaint }) => {
@@ -10,12 +10,15 @@ const ComplaintCard = ({ complaint }) => {
         navigate(`/view-complaints/complaint/${complaint.id}`, { state: { complaintId: complaint.id } });
     };
 
+    // Update the base URL to match your server configuration
+    const baseURL = "http://localhost/semester4/my-project/src/uploads/";
+
     return (
         <div className="border-b border-gray-200 py-4">
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
-                    <img src={complaint.user_photo} alt="User" className="rounded-full w-8 h-8" />
-                    <span className="text-gray-700 font-medium">${complaint.state}</span>
+                    <img src={`${baseURL}${complaint.user_photo}`} alt="User" className="rounded-full w-10 h-10" />
+                    <span className="text-gray-700 font-medium">{complaint.user_name}</span>
                     <span className="text-gray-500 text-sm">{new Date(complaint.created_at).toLocaleString()}</span>
                     <span className="text-gray-500 text-sm">{complaint.category}</span>
                     <span className={`${complaint.state} text-sm`}>{complaint.state}</span>
@@ -34,10 +37,6 @@ const ComplaintCard = ({ complaint }) => {
                     <button className="text-blue-600 flex items-center">
                         <FontAwesomeIcon icon={faThumbsUp} className="mr-1" />
                         Up Vote <span className="ml-1">{complaint.likes}</span>
-                    </button>
-                    <button className="text-blue-600 flex items-center">
-                        <FontAwesomeIcon icon={faShare} className="mr-1" />
-                        Share
                     </button>
                 </div>
             </div>

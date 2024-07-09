@@ -15,6 +15,7 @@ export default function Header() {
             // Fetch user data from your API
             axios.get(`http://localhost/semester4/my-project/src/Report/get_user.php?user_id=${loggedInUser.id}`)
                 .then(response => {
+                    console.log('User data fetched:', response.data);
                     setUser(response.data);
                     setLoading(false); // Set loading to false after data is fetched
                 })
@@ -38,7 +39,10 @@ export default function Header() {
         navigate('/login'); // Redirect to login page
     };
 
-    console.log(loggedInUser);
+    const baseURL = "http://localhost/semester4/my-project/src/uploads/";
+
+    console.log('Logged in user:', loggedInUser);
+    console.log('User photo path:', user ? `${baseURL}${user.photo_path}` : 'No user');
 
     return (
         <header className="flex justify-between items-center p-4 bg-white shadow-md">
@@ -55,7 +59,7 @@ export default function Header() {
                 ) : user ? (
                     <>
                         <span className="text-gray-700 font-medium">{user.name}</span>
-                        <img src={user.photo_path} alt="User" className="h-6 w-6 rounded-full border-2 border-gray-300" />
+                        <img src={`${baseURL}${user.photo_path}`} alt="User" className="h-6 w-6 rounded-full border-2 border-gray-300" />
                         <button onClick={handleLogout} className="text-gray-700 hover:text-blue-600 font-medium">Logout</button>
                     </>
                 ) : (

@@ -153,8 +153,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-white">Tom Cook</p>
-                  <p className="text-xs font-medium text-indigo-200 group-hover:text-white">View profile</p>
+                  <p className="text-sm font-medium text-white">Ahmed</p>
                 </div>
               </div>
             </a>

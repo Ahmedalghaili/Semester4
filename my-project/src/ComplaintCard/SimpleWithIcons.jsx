@@ -25,7 +25,6 @@ function isEventActive(status) {
 
 // Functional component that renders a timeline with icons
 function SimpleWithIcons({ timeline }) {
-  console.log(timeline);
   return (
     <div className="flow-root">
       <ul className="-mb-8">
