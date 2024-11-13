@@ -39,6 +39,30 @@
 - **MySQL** (database for storing user and issue data)
 
 ### Steps
+Install Dependencies:
+
+npm install
+
+
+Configure Database:
+
+Configure Database:
+
+Use XAMPP or another MySQL service, and set up a database as required. Configure the .env file with your database credentials and OpenAI API key:
+
+plaintext
+Copy code
+OPENAI_API_KEY=your_openai_api_key_here
+DB_USER=your_db_username
+DB_PASS=your_db_password
+DB_NAME=your_db_name
+Run the Application:
+
+Start the server with:
+
+bash
+Copy code
+npm run dev
 
 1. **Clone the Repository**:
 
