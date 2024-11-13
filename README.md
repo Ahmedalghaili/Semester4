@@ -1,6 +1,12 @@
+
 # SmartCity
 
 **SmartCity** is a web-based application designed to enhance community engagement with local government. It enables community members to report public issues and track their resolution, facilitating transparent and accountable communication between citizens and government officials.
+
+## Screenshots
+
+### Homepage
+![Homepage Screenshot](https://github.com/user-attachments/assets/bd7845e5-d8c4-4000-9ab5-83c27eea3124)
 
 ## Project Overview
 
@@ -39,33 +45,70 @@
 - **MySQL** (database for storing user and issue data)
 
 ### Steps
-Install Dependencies:
-
-npm install
-
-
-Configure Database:
-
-Configure Database:
-
-Use XAMPP or another MySQL service, and set up a database as required. Configure the .env file with your database credentials and OpenAI API key:
-
-plaintext
-Copy code
-OPENAI_API_KEY=your_openai_api_key_here
-DB_USER=your_db_username
-DB_PASS=your_db_password
-DB_NAME=your_db_name
-Run the Application:
-
-Start the server with:
-
-bash
-Copy code
-npm run dev
 
 1. **Clone the Repository**:
 
    ```bash
    git clone https://github.com/Ahmedalghaili/SmartCity.git
    cd SmartCity
+   ```
+
+2. **Install Dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure Database**:
+
+   Set up a MySQL database using XAMPP or another MySQL service. Then, configure the `.env` file with your database credentials and OpenAI API key:
+
+   ```plaintext
+   OPENAI_API_KEY=your_openai_api_key_here
+   DB_USER=your_db_username
+   DB_PASS=your_db_password
+   DB_NAME=your_db_name
+   ```
+
+4. **Run the Application**:
+
+   Start the server with:
+
+   ```bash
+   npm run dev
+   ```
+
+   The application will be available at `http://localhost:5000`.
+
+## Usage
+
+1. **Register and Log In**: Create an account to access features.
+2. **Report an Issue**: Submit complaints on local issues with details and attachments.
+3. **Track Issues**: Monitor the status of your reports on the dashboard.
+4. **Statistics**: View statistical insights on reported issues.
+5. **Chatbot Assistance**: Use the chatbot for guidance on making reports or navigating the platform.
+
+## Development Process
+
+- **User Research**: Surveys and interviews with target users to guide design and functionality.
+- **UI/UX Design**: Created in Figma, focusing on ease of use.
+- **Frontend & Backend Development**: Built using Node.js, React, and Tailwind CSS.
+- **LLM Integration**: AI-powered chatbot for improved user assistance.
+- **Testing**: Comprehensive testing to ensure feature functionality and usability.
+
+## Tools Used
+
+- **Visual Studio Code**: Development environment
+- **Figma**: UI/UX design
+- **XAMPP**: MySQL database management
+- **React & Tailwind CSS**: Frontend framework and styling
+
+## Future Enhancements
+
+- **Third-Party Integrations**: APIs for enhanced communication and functionality with external services.
+- **Multimedia Support**: Allow users to submit reports with photos, videos, or audio.
+- **Automated Issue Prioritization**: Machine learning for smarter categorization and prioritization.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
